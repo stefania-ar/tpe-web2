@@ -18,8 +18,8 @@ $r->addRoute("buscarPorDireccion", "POST", "ControllerPeliculas", "searchByDirec
 $r->addRoute("buscarPorCalificacion", "POST", "ControllerPeliculas", "searchByCalification");
 $r->addRoute("crearGenero", "POST", "ControllerPeliculas", "addGenre");
 $r->addRoute("borrar/:ID", "GET", "ControllerPeliculas", "deleteMovie");
-$r->addRoute("editar/:ID", "GET", "ControllerPeliculas", "editMovie");
-
+$r->addRoute("editar/:ID", "GET", "ControllerPeliculas", "showForm");
+$r->addRoute("editarDesdeForm/:ID", "POST", "ControllerPeliculas", "editMovie");
 
 
 $r->setDefaultRoute("ControllerPeliculas", "home");

@@ -83,10 +83,18 @@ Class ControllerPeliculas{
         //echo '<p><a href="javascript:history.go(-1)" title="Return to previous page">&laquo; Go back</a></p>';
     }
 
+    function showForm($params=null){
+        $id= $params [':ID'];
+        $generos=$this->model->selectAllGenres();
+        $peliculas=$this->model->returnMovieByID($id);
+        $this->view->showForm($id, $generos, $peliculas);
+        
+    }
+
     function editMovie($params=null){
         $id= $params [':ID'];
-        $this->view->showForm($id);
-        $this->model->edit($id);
+        $this->model->edit($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],$_POST['genero'],$id);
+        header("Location: ".BASE_URL."showAll");//$this->view->homeLocation();
     }
 }
 

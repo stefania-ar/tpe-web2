@@ -73,10 +73,12 @@ class ViewPeliculas{
         $smarty->display('templates/home.tpl');
     }
 
-    function showForm($id){
+    function showForm($id, $generos, $peliculas){
         $smarty = new Smarty();
 
         $smarty->assign('title_header', $this->title);
+        $smarty->assign('generos', $generos);
+        $smarty->assign('id', $id);
         $smarty->assign('peliculas', $peliculas);
         $smarty->assign('titulo', "Filtrar/buscar peliculas por");
         $smarty->assign('titulo2', "Agregue un género");
@@ -86,6 +88,7 @@ class ViewPeliculas{
         $smarty->assign('Enviar', "Enviar");
         $smarty->assign('calif', "Calificacion");
         $smarty->assign('genero', "Género");
+        $smarty->assign('BASE_URL', "'BASE_URL'");
 
         $smarty->display('templates/form_edit.tpl');
     }
