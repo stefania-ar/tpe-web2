@@ -8,7 +8,6 @@ class ViewPeliculas{
 
     function __construct(){
         $this->title= "PELIS";
-        //$this->smarty->debugger=true;
     }
 
     function homeLocation(){

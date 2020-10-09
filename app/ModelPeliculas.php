@@ -7,7 +7,7 @@ class ModelPeliculas{
     function __construct(){
         $this->db= new PDO('mysql:host=localhost;' .'dbname=basepeliculas;charset=utf8' , 'root', '');
     }
-    //moel
+
     function insert($title, $anio, $pais, $director_a, $calif, $genre){
         $sentencia=$this->db->prepare(" INSERT INTO peliculas(titulo, anio, pais, director_a, calificacion, id_genero) 
                 VALUES (?,?,?,?,?,?)");
@@ -24,8 +24,7 @@ class ModelPeliculas{
     function selectAllGenres(){
         $sentencia=$this->db->prepare(" SELECT * FROM generos");
         $sentencia-> execute();
-        $generos=$sentencia-> fetchAll(PDO::FETCH_OBJ);
-        return $generos;
+        return $generos=$sentencia-> fetchAll(PDO::FETCH_OBJ);
      }
      
     function selectByGenre($genre){
