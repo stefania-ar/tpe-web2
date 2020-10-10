@@ -2,15 +2,18 @@
 
 require_once 'ModelPeliculas.php';
 require_once 'ViewPeliculas.php';
+require_once './_View/ViewUser.php';
 
 Class ControllerPeliculas{
 
     private $model;
     private $view;
+    private $viewUser;
 
     function __construct(){
         $this->model= new ModelPeliculas();
         $this->view= new ViewPeliculas();
+        $this->viewUser= new ViewUser();
     }
 
     function home (){
@@ -20,11 +23,16 @@ Class ControllerPeliculas{
 
     private function checkLogin(){
         session_start();
-        
-        if(!isset($_SESSION['USER'])){
-            header('Location: '.LOGIN);
-            die();
+
+        if(!isset($_SESSION['TYPE'])){
+            $this->viewUser->render_login();
+                die();
+        }else if ( (isset($_SESSION['TYPE'])) && ($_SESSION['TYPE']!=1) ) {
+                $this->viewUser->render_login();
+                die();
+            
         }
+        
     }
 
     function insert(){
@@ -107,10 +115,14 @@ Class ControllerPeliculas{
 
     function editMovie($params=null){
         $this->checkLogin();
-        
+
         $id= $params [':ID'];
         $this->model->edit($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],$_POST['genero'],$id);
-        header("Location: ".BASE_URL."showAll");//$this->view->homeLocation();
+        header("Location: ".BASE_URL."showAll");
+    }
+
+    function deleteGenre(){
+        
     }
 }
 

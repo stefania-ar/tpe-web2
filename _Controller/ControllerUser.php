@@ -2,6 +2,7 @@
 
 require_once './_Model/ModelUser.php';
 require_once './_View/ViewUser.php';
+require_once './app/ViewPeliculas.php';
 
 Class ControllerUser{
 
@@ -14,6 +15,20 @@ Class ControllerUser{
     }
 
     function login (){
+        $this->view->render_login();
+        session_start();
+
+        if(!isset($_SESSION['USER'])){
+            $this->view->render_login();
+            die();
+        }else {
+            $this->view->homeLocation();
+        }
+    }
+
+    function logout(){
+        session_start();
+        session_destroy();
         $this->view->render_login();
     }
 
@@ -30,6 +45,7 @@ Class ControllerUser{
                 if(password_verify($pass, $userDB->password)) {
                     session_start();
                     $_SESSION['USER']=  $userDB->username;
+                    $_SESSION['TYPE']=  $userDB->tipo_usuario;
 
                     $this->view->homeLocation();
                 }else $this->view->render_login("Contraseña incorrecta");

@@ -19,6 +19,7 @@ class ViewUser{
 
         $smarty->assign('title_header', $this->title);
         $smarty->assign('mensaje', $mensaje);
+        $smarty->assign('m', "Tenga en cuenta que si está intentando acceder a permisos especiales sin ser administrador se le redirigirá al home automáticamente");
 
         $smarty->display('./templates/login.tpl');
     }

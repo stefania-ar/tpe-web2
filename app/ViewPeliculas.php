@@ -50,9 +50,15 @@ class ViewPeliculas{
  
     function viewAllGenres($generos){
         $smarty = new Smarty();
+
         $smarty->assign('title_header', $this->title);
         $smarty->assign('titulo', "LISTA DE GENEROS");
         $smarty->assign('generos', $generos);
+        $smarty->assign('eliminar', "Eliminar");
+        $smarty->assign('editar', "Editar");
+        $smarty->assign('G', "Generos");
+
+
         $smarty->display('templates/viewAllGenres.tpl');
     }
 

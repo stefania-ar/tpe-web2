@@ -1,6 +1,7 @@
 {include file="header.tpl"}
 
 <p>{$mensaje}</p>
+<p>{$m}</p>
 <div class="container">
 	<div class="row">
     	<div class="container" id="formContainer">

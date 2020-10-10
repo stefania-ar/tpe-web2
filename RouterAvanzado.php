@@ -1,6 +1,8 @@
 <?php
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 define('LOGIN', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/login');
+define('LOGOUT', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/logout');
+
 
 require_once 'app/ControllerPeliculas.php';
 require_once '_Controller/ControllerUser.php';
@@ -22,7 +24,10 @@ $r->addRoute("crearGenero", "POST", "ControllerPeliculas", "addGenre");
 $r->addRoute("borrar/:ID", "GET", "ControllerPeliculas", "deleteMovie");
 $r->addRoute("editar/:ID", "GET", "ControllerPeliculas", "showForm");
 $r->addRoute("editarDesdeForm/:ID", "POST", "ControllerPeliculas", "editMovie");
+$r->addRoute("borrar_genero/:ID", "GET", "ControllerPeliculas", "deleteGenre");
+
 $r->addRoute("login", "GET", "ControllerUser", "login");
+$r->addRoute("logout", "GET", "ControllerUser", "logout");
 $r->addRoute("verify", "POST", "ControllerUser", "verifyUser");
 
 $r->setDefaultRoute("ControllerPeliculas", "home");
