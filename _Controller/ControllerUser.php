@@ -25,14 +25,15 @@ Class ControllerUser{
         if(isset($user)){
             $userDB=$this->model->getUser($user);
 
-            if(isset($user) && $userDB){
-               
-                foreach ($userDB as $contraseña) {
-                    if(password_verify($pass, $contraseña->password)) {
-                        $this->view->homeLocation();
-                    }else $this->view->render_login("Contraseña incorrecta");
-                }
-                        
+            if(isset($userDB) && $userDB){
+
+                if(password_verify($pass, $userDB->password)) {
+                    session_start();
+                    $_SESSION['USER']=  $userDB->username;
+
+                    $this->view->homeLocation();
+                }else $this->view->render_login("Contraseña incorrecta");
+
             }else $this->view->render_login("Usuario incorrecto");
             
         }

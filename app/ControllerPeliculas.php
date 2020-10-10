@@ -18,7 +18,18 @@ Class ControllerPeliculas{
         $this->view->showHome($peliculas);
     }
 
+    private function checkLogin(){
+        session_start();
+        
+        if(!isset($_SESSION['USER'])){
+            header('Location: '.LOGIN);
+            die();
+        }
+    }
+
     function insert(){
+        $this->checkLogin();
+
         $genre=$_POST['genero'];
         $this->model->insert($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],$genre);
         $this->view->homeLocation();
@@ -71,16 +82,19 @@ Class ControllerPeliculas{
     }
 
     function addGenre(){
+        $this->checkLogin();
+
         $genre= $_POST['generoCrear'];
         $this->model->insertGenre($genre);
         $this->view->homeLocation();
     }
 
     function deleteMovie($params=null){
+        $this->checkLogin();
+
         $id= $params [':ID'];
         $this->model->delete($id);
         header("Location: ".BASE_URL."showAll");
-        //echo '<p><a href="javascript:history.go(-1)" title="Return to previous page">&laquo; Go back</a></p>';
     }
 
     function showForm($params=null){
@@ -92,6 +106,8 @@ Class ControllerPeliculas{
     }
 
     function editMovie($params=null){
+        $this->checkLogin();
+        
         $id= $params [':ID'];
         $this->model->edit($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],$_POST['genero'],$id);
         header("Location: ".BASE_URL."showAll");//$this->view->homeLocation();
