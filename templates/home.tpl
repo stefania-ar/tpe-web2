@@ -1,7 +1,7 @@
 {include file="header.tpl"}
 {include file="button_logout.tpl"}
 
-<p>Agregue sus peliculas favoritas</p>
+<h1>{$tituloH}</h1>
 
         <form action="insert" method="post">
         <input type="text" name="title" placeholder="inserte titulo">
@@ -24,8 +24,8 @@
                 </select>
             <button type="submit">{$Enviar}</button>
         </form>
-        <a href="showAll" >MOSTRAR TODAS LAS PELIS</a>
-        <a href="showAllGenres" >MOSTRAR TODOS LOS GÉNEROS</a>
+        <button><a href="showAll" >MOSTRAR TODAS LAS PELIS</a></button>
+        <button><a href="showAllGenres" >MOSTRAR TODOS LOS GÉNEROS</a></button>
 
         <h2>{$titulo2}</h2>
         <form action="crearGenero" method="post">

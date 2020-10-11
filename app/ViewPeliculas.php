@@ -52,6 +52,8 @@ class ViewPeliculas{
         $smarty->assign('Calificacion', "Calificación");
         $smarty->assign('eliminar', "Eliminar");
         $smarty->assign('editar', "Editar");
+        $smarty->assign('detalle', "Ver detalle");
+        
 
         $smarty->display('templates/onlyMovies.tpl');
     }
@@ -85,6 +87,7 @@ class ViewPeliculas{
         $smarty->assign('l', "logout");
         $smarty->assign('li', "login");
         $smarty->assign('user', $user);
+        $smarty->assign('tituloH', "Agregue sus peliculas favoritas");
 
         $smarty->display('templates/home.tpl');
     }

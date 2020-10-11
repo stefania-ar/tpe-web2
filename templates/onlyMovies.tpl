@@ -21,6 +21,7 @@
                     <td>{$pelicula->nombre}</td>
                     <td><button><a href="borrar/{$pelicula->id}"> {$eliminar}</a></button></td>
                     <td><button><a href="editar/{$pelicula->id}"> {$editar}</a></button></td>
+                    <td><button><a href="detalle/{$pelicula->id}"> {$detalle}</a></button></td>
                 </tr>
         {/foreach}
         </tbody>    

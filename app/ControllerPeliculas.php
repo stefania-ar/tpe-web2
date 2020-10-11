@@ -21,7 +21,7 @@ Class ControllerPeliculas{
 
     function home (){
         $peliculas=$this->model->selectAllGenres();
-        
+
         session_start();
         $user;
         if(isset($_SESSION['USER'])){
@@ -156,6 +156,11 @@ Class ControllerPeliculas{
         $this->view->genresLocation();
     }
 
+    function showDetail($params=null){
+        $id= $params [':ID'];
+        $peliculas=$this->model->returnMovieByID($id);
+        $this->view->viewAllMovies($peliculas);
+    }
 }
 
 
