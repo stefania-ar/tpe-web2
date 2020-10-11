@@ -89,6 +89,22 @@ class ModelPeliculas{
         $sentencia=$this->db->prepare("UPDATE peliculas SET titulo=?, anio=?, pais=?, director_a=?, calificacion=?, id_genero=? WHERE id=?");
         $sentencia-> execute(array($title, $anio, $pais, $director_a, $calif, $genre, $id));
     }
+
+    function deleteGenre($id){
+        $sentencia=$this->db->prepare("DELETE FROM generos WHERE id_genero=?");
+        $sentencia-> execute(array($id));
+    }
+
+    function returnGenreByID($id_genero){
+        $sentencia=$this->db->prepare(" SELECT * FROM generos WHERE id_genero=?");
+        $sentencia-> execute(array($id_genero));
+        return $peliculas=$sentencia-> fetch(PDO::FETCH_OBJ);
+    }
+
+    function editGenre($nombre, $id_genero){
+        $sentencia=$this->db->prepare("UPDATE generos SET nombre=? WHERE id_genero=?");
+        $sentencia-> execute(array($nombre, $id_genero));
+    }
 }
 
 

@@ -3,22 +3,33 @@
 require_once 'ModelPeliculas.php';
 require_once 'ViewPeliculas.php';
 require_once './_View/ViewUser.php';
+require_once './_Model/ModelUser.php';
 
 Class ControllerPeliculas{
 
     private $model;
     private $view;
     private $viewUser;
+    private $modelUser;
 
     function __construct(){
         $this->model= new ModelPeliculas();
         $this->view= new ViewPeliculas();
         $this->viewUser= new ViewUser();
+        $this->modelUser= new ModelUser();
     }
 
     function home (){
         $peliculas=$this->model->selectAllGenres();
-        $this->view->showHome($peliculas);
+        
+        session_start();
+        $user;
+        if(isset($_SESSION['USER'])){
+            $user=true;
+        }else $user=false;
+
+        
+        $this->view->showHome($peliculas, $user);
     }
 
     private function checkLogin(){
@@ -102,7 +113,7 @@ Class ControllerPeliculas{
 
         $id= $params [':ID'];
         $this->model->delete($id);
-        header("Location: ".BASE_URL."showAll");
+        $this->view->moviesLocation();
     }
 
     function showForm($params=null){
@@ -118,12 +129,33 @@ Class ControllerPeliculas{
 
         $id= $params [':ID'];
         $this->model->edit($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],$_POST['genero'],$id);
-        header("Location: ".BASE_URL."showAll");
+        $this->view->moviesLocation();
     }
 
-    function deleteGenre(){
-        
+    function deleteGenre($params=null){
+        $this->checkLogin();
+
+        $id= $params [':ID'];
+        $this->model->deleteGenre($id);
+        $this->view->genresLocation();
     }
+
+    function showFormGenres($params=null){
+        $id_genero= $params [':ID'];
+
+        $genero=$this->model->returnGenreByID($id_genero);
+        $this->view->showFormGenre($id_genero, $genero);
+    }
+
+    function editGenre($params=null){
+        $this->checkLogin();
+        
+        $id_genero= $params [':ID'];
+        $nombre=$_POST['genreName'];
+        $this->model->editGenre($nombre, $id_genero);
+        $this->view->genresLocation();
+    }
+
 }
 
 

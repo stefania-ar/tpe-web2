@@ -11,8 +11,8 @@
         {foreach $generos as $genero} 
                 <tr>
                     <td> {$genero->nombre} </td>
-                    <td><button>{$eliminar}</button></td>
-                    <td><button>{$editar}</button></td>
+                    <td><button><a href="borrar_genero/{$genero->id_genero}"> {$eliminar}</a></button></td>
+                    <td><button><a href="editar_genero/{$genero->id_genero}"> {$editar}</a></button></td>
                 </tr>
         {/foreach}
         </tbody>    

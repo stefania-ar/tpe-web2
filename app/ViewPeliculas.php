@@ -14,6 +14,14 @@ class ViewPeliculas{
         header("Location: ".BASE_URL."home");
     }
 
+    function genresLocation(){
+        header("Location: ".BASE_URL."showAllGenres");
+    }
+
+    function moviesLocation(){
+        header("Location: ".BASE_URL."showAll");
+    }
+
     function viewAllMovies($peliculas){
         $smarty = new Smarty();
 
@@ -62,7 +70,7 @@ class ViewPeliculas{
         $smarty->display('templates/viewAllGenres.tpl');
     }
 
-    function showHome($peliculas){
+    function showHome($peliculas, $user){
         $smarty = new Smarty();
         $smarty->assign('title_header', $this->title);
         $smarty->assign('peliculas', $peliculas);
@@ -74,6 +82,9 @@ class ViewPeliculas{
         $smarty->assign('Enviar', "Enviar");
         $smarty->assign('calif', "Calificacion");
         $smarty->assign('genero', "Género");
+        $smarty->assign('l', "logout");
+        $smarty->assign('li', "login");
+        $smarty->assign('user', $user);
 
         $smarty->display('templates/home.tpl');
     }
@@ -96,6 +107,15 @@ class ViewPeliculas{
         $smarty->assign('BASE_URL', "'BASE_URL'");
 
         $smarty->display('templates/form_edit.tpl');
+    }
+
+    function showFormGenre($id_genero, $genero){
+        $smarty = new Smarty();
+        $smarty->assign('genero', $genero);
+        $smarty->assign('Enviar', "Enviar");
+        $smarty->assign('title_header', $this->title);
+
+        $smarty->display('templates/form_edit_genre.tpl');
     }
 
 }

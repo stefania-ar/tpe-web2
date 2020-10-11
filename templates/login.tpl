@@ -1,10 +1,11 @@
 {include file="header.tpl"}
 
 <p>{$mensaje}</p>
-<p>{$m}</p>
+
 <div class="container">
 	<div class="row">
     	<div class="container" id="formContainer">
+        <p>{$m}</p>
           <form class="form-signin" id="login" role="form" action="verify" method="POST">
             <h3 class="form-signin-heading">Please sign in</h3>
             

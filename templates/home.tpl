@@ -1,4 +1,6 @@
 {include file="header.tpl"}
+{include file="button_logout.tpl"}
+
 <p>Agregue sus peliculas favoritas</p>
 
         <form action="insert" method="post">

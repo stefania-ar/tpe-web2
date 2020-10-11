@@ -24,7 +24,9 @@ class ViewUser{
         $smarty->display('./templates/login.tpl');
     }
 
-
+    function loginLocation(){
+        header("Location: ".BASE_URL."login");
+    }
 
 
 

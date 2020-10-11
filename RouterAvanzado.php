@@ -24,7 +24,11 @@ $r->addRoute("crearGenero", "POST", "ControllerPeliculas", "addGenre");
 $r->addRoute("borrar/:ID", "GET", "ControllerPeliculas", "deleteMovie");
 $r->addRoute("editar/:ID", "GET", "ControllerPeliculas", "showForm");
 $r->addRoute("editarDesdeForm/:ID", "POST", "ControllerPeliculas", "editMovie");
+
+//GENERO
 $r->addRoute("borrar_genero/:ID", "GET", "ControllerPeliculas", "deleteGenre");
+$r->addRoute("editar_genero/:ID", "GET", "ControllerPeliculas", "showFormGenres");
+$r->addRoute("editarGeneroDesdeForm/:ID", "POST", "ControllerPeliculas", "editGenre");
 
 $r->addRoute("login", "GET", "ControllerUser", "login");
 $r->addRoute("logout", "GET", "ControllerUser", "logout");

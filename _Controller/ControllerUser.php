@@ -15,7 +15,6 @@ Class ControllerUser{
     }
 
     function login (){
-        $this->view->render_login();
         session_start();
 
         if(!isset($_SESSION['USER'])){
@@ -29,7 +28,7 @@ Class ControllerUser{
     function logout(){
         session_start();
         session_destroy();
-        $this->view->render_login();
+        $this->view->loginLocation();
     }
 
     function verifyUser(){
