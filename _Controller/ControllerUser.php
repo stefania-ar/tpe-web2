@@ -2,7 +2,7 @@
 
 require_once './_Model/ModelUser.php';
 require_once './_View/ViewUser.php';
-require_once './app/ViewPeliculas.php';
+require_once './_View/ViewPeliculas.php';
 
 Class ControllerUser{
 

@@ -4,7 +4,7 @@ define('LOGIN', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . d
 define('LOGOUT', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/logout');
 
 
-require_once 'app/ControllerPeliculas.php';
+require_once '_Controller/ControllerPeliculas.php';
 require_once '_Controller/ControllerUser.php';
 require_once 'RouterClass.php';
 

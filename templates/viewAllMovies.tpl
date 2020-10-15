@@ -1,4 +1,6 @@
 {include file="header.tpl"}
+{include file="button_home.tpl"}
+
     <table>
            <thead>
                <tr>
@@ -11,7 +13,7 @@
                </tr>
            </thead>
        <tbody>
-        {foreach $peliculas as $pelicula} 
+        {foreach $peliculas as $pelicula}
                 <tr>
                     <td>{$pelicula->titulo}</td>
                     <td>{$pelicula->anio}</td>
@@ -21,7 +23,8 @@
                     <td>{$pelicula->nombre}</td>
                 </tr>
         {/foreach}
-        </tbody>    
+        </tbody>
     </table>
 
-{include file="footer.tpl"}        
+
+{include file="footer.tpl"}

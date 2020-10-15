@@ -1,4 +1,0 @@
-Primero hay que fijarse de poner todos los is isset para que nos ande, no habría problema xq igual llega nulo pero igual.
-Hacer carpetas separadas para los controller bla bla.
-Hay 2 funciones iguales en el modelpeliculas sobre generos fijate
-Borrar los archivos que no sirven

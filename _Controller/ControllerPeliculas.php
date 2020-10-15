@@ -1,24 +1,54 @@
 <?php
 
-require_once 'ModelPeliculas.php';
-require_once 'ViewPeliculas.php';
+require_once './_Model/ModelPeliculas.php';
+require_once './_View/ViewPeliculas.php';
+require_once './_View/ViewUser.php';
+require_once './_Model/ModelUser.php';
 
 Class ControllerPeliculas{
 
     private $model;
     private $view;
+    private $viewUser;
+    private $modelUser;
 
     function __construct(){
         $this->model= new ModelPeliculas();
         $this->view= new ViewPeliculas();
+        $this->viewUser= new ViewUser();
+        $this->modelUser= new ModelUser();
     }
 
     function home (){
         $peliculas=$this->model->selectAllGenres();
-        $this->view->showHome($peliculas);
+
+        session_start();
+        $user;
+        if(isset($_SESSION['USER'])){
+            $user=true;
+        }else $user=false;
+
+        
+        $this->view->showHome($peliculas, $user);
+    }
+
+    private function checkLogin(){
+        session_start();
+
+        if(!isset($_SESSION['TYPE'])){
+            $this->viewUser->render_login();
+                die();
+        }else if ( (isset($_SESSION['TYPE'])) && ($_SESSION['TYPE']!=1) ) {
+                $this->viewUser->render_login();
+                die();
+            
+        }
+        
     }
 
     function insert(){
+        $this->checkLogin();
+
         $genre=$_POST['genero'];
         $this->model->insert($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],$genre);
         $this->view->homeLocation();
@@ -71,16 +101,19 @@ Class ControllerPeliculas{
     }
 
     function addGenre(){
+        $this->checkLogin();
+
         $genre= $_POST['generoCrear'];
         $this->model->insertGenre($genre);
         $this->view->homeLocation();
     }
 
     function deleteMovie($params=null){
+        $this->checkLogin();
+
         $id= $params [':ID'];
         $this->model->delete($id);
-        header("Location: ".BASE_URL."showAll");
-        //echo '<p><a href="javascript:history.go(-1)" title="Return to previous page">&laquo; Go back</a></p>';
+        $this->view->moviesLocation();
     }
 
     function showForm($params=null){
@@ -92,9 +125,41 @@ Class ControllerPeliculas{
     }
 
     function editMovie($params=null){
+        $this->checkLogin();
+
         $id= $params [':ID'];
         $this->model->edit($_POST['title'],$_POST['anio'],$_POST['pais'],$_POST['director_a'],$_POST['calif'],$_POST['genero'],$id);
-        header("Location: ".BASE_URL."showAll");//$this->view->homeLocation();
+        $this->view->moviesLocation();
+    }
+
+    function deleteGenre($params=null){
+        $this->checkLogin();
+
+        $id= $params [':ID'];
+        $this->model->deleteGenre($id);
+        $this->view->genresLocation();
+    }
+
+    function showFormGenres($params=null){
+        $id_genero= $params [':ID'];
+
+        $genero=$this->model->returnGenreByID($id_genero);
+        $this->view->showFormGenre($id_genero, $genero);
+    }
+
+    function editGenre($params=null){
+        $this->checkLogin();
+        
+        $id_genero= $params [':ID'];
+        $nombre=$_POST['genreName'];
+        $this->model->editGenre($nombre, $id_genero);
+        $this->view->genresLocation();
+    }
+
+    function showDetail($params=null){
+        $id= $params [':ID'];
+        $peliculas=$this->model->returnMovieByID($id);
+        $this->view->viewAllMovies($peliculas);
     }
 }
 

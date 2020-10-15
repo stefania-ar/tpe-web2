@@ -1,4 +1,6 @@
 {include file="header.tpl"}
+{include file="button_home.tpl"}
+
     <table>
            <thead>
                <tr>
@@ -8,10 +10,13 @@
                    <th>{$Director_a}</th>
                    <th>{$Calificacion}</th>
                    <th>{$Genero}</th>
+                   <th>Eliminar</th>
+                   <th>Editar</th>
+                   <th>Ver detalle</th>
                </tr>
            </thead>
        <tbody>
-        {foreach $peliculas as $pelicula} 
+        {foreach $peliculas as $pelicula}
                 <tr>
                     <td>{$pelicula->titulo}</td>
                     <td>{$pelicula->anio}</td>
@@ -24,7 +29,7 @@
                     <td><button><a href="detalle/{$pelicula->id}"> {$detalle}</a></button></td>
                 </tr>
         {/foreach}
-        </tbody>    
+        </tbody>
     </table>
 
-{include file="footer.tpl"}        
+{include file="footer.tpl"}
